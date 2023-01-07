@@ -62,42 +62,42 @@ exports.addOrder = async (req) => {
     orderId,
   };
   data.medicines = medicines ? JSON.parse(medicines) : [];
-  if (req?.files?.images) {
-    let filetype = ["image/png", "image/jpeg"];
-    const { images } = req?.files;
-    if (images.length) {
-      for (let index = 0; index < images.length; index++) {
-        if (!filetype.includes(images[index].mimetype)) {
-          return {
-            statusCode: statusCode.SERVER_ERROR,
-            success: 0,
-            message: responseMessage.INVALID_FILE_TYPE,
-          };
-        }
+  // if (req?.files?.images) {
+  //   let filetype = ["image/png", "image/jpeg"];
+  //   const { images } = req?.files;
+  //   if (images.length) {
+  //     for (let index = 0; index < images.length; index++) {
+  //       if (!filetype.includes(images[index].mimetype)) {
+  //         return {
+  //           statusCode: statusCode.SERVER_ERROR,
+  //           success: 0,
+  //           message: responseMessage.INVALID_FILE_TYPE,
+  //         };
+  //       }
 
-        let filename = `${orderId}-` + Date.now() + images[index].name;
+  //       let filename = `${orderId}-` + Date.now() + images[index].name;
 
-        images[index].mv(process.env.filePath + filename);
+  //       images[index].mv(process.env.filePath + filename);
 
-        medImage.push(filename);
-      }
-    } else {
-      if (!filetype.includes(images.mimetype)) {
-        return {
-          statusCode: statusCode.SERVER_ERROR,
-          success: 0,
-          message: responseMessage.INVALID_FILE_TYPE,
-        };
-      }
+  //       medImage.push(filename);
+  //     }
+  //   } else {
+  //     if (!filetype.includes(images.mimetype)) {
+  //       return {
+  //         statusCode: statusCode.SERVER_ERROR,
+  //         success: 0,
+  //         message: responseMessage.INVALID_FILE_TYPE,
+  //       };
+  //     }
 
-      let filename = `${orderId}-` + Date.now() + images.name;
-      images.mv(process.env.filePath + images.name);
+  //     let filename = `${orderId}-` + Date.now() + images.name;
+  //     images.mv(process.env.filePath + images.name);
 
-      medImage.push(filename);
-    }
+  //     medImage.push(filename);
+  //   }
 
-    data.medImage = medImage;
-  }
+  //   data.medImage = medImage;
+  // }
 
   const order = new Order(data);
   let result = await order.save();
