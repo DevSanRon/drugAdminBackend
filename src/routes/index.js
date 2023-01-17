@@ -6,8 +6,8 @@ const admin = require("./admins");
 const statusCode = require("../helpers/statuscode");
 const { responseData } = require("../helpers/response");
 
-router.get("/check", (req, res) => {
-  return responseData({
+router.get("/check", async (req, res) => {
+  return await responseData({
     res,
     statusCode: statusCode.SUCCESS,
     success: 1,
