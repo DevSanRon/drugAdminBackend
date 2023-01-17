@@ -45,9 +45,9 @@ exports.addOrder = async (req) => {
   let prevData = await Order.find().sort({ _id: -1 }).limit(1);
   let orderId = prevData[0]?.orderId ? prevData[0]?.orderId + 1 : 1001;
 
-  let { orderStatus, medicines } = req.body;
+  let { orderStatus, medicines,images } = req.body;
 
-  if (!orderStatus || !(req?.files?.images || medicines))
+  if (!orderStatus || !(images || medicines))
     return {
       statusCode: statusCode.BADREQUEST,
       success: 0,
@@ -61,43 +61,10 @@ exports.addOrder = async (req) => {
     orderStatus: orderStatus,
     orderId,
   };
+  //check this
+
   data.medicines = medicines ? JSON.parse(medicines) : [];
-  // if (req?.files?.images) {
-  //   let filetype = ["image/png", "image/jpeg"];
-  //   const { images } = req?.files;
-  //   if (images.length) {
-  //     for (let index = 0; index < images.length; index++) {
-  //       if (!filetype.includes(images[index].mimetype)) {
-  //         return {
-  //           statusCode: statusCode.SERVER_ERROR,
-  //           success: 0,
-  //           message: responseMessage.INVALID_FILE_TYPE,
-  //         };
-  //       }
-
-  //       let filename = `${orderId}-` + Date.now() + images[index].name;
-
-  //       images[index].mv(process.env.filePath + filename);
-
-  //       medImage.push(filename);
-  //     }
-  //   } else {
-  //     if (!filetype.includes(images.mimetype)) {
-  //       return {
-  //         statusCode: statusCode.SERVER_ERROR,
-  //         success: 0,
-  //         message: responseMessage.INVALID_FILE_TYPE,
-  //       };
-  //     }
-
-  //     let filename = `${orderId}-` + Date.now() + images.name;
-  //     images.mv(process.env.filePath + images.name);
-
-  //     medImage.push(filename);
-  //   }
-
-  //   data.medImage = medImage;
-  // }
+  data.images= images
 
   const order = new Order(data);
   let result = await order.save();

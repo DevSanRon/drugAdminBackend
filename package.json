@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "server":"nodemon index.js"
-    
+    "server": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -22,20 +21,14 @@
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
-    "cookie-parser": "^1.4.6",
-    "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "express-fileupload": "^1.4.0",
     "fcm-notification": "^2.0.0",
     "firebase-admin": "^11.3.0",
-    "https": "^1.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.3",
     "nodemon": "^2.0.16",
-    "paperwork": "^2.1.1",
-    "passport": "^0.5.2",
-    "twilio": "^3.83.3"
+    "paperwork": "^2.1.1"
   }
 }
